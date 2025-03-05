@@ -2,13 +2,11 @@ import type { NextConfig } from "next";
 
 const isProd = process.env.NODE_ENV === "production";
 
-module.exports = {
+const nextConfig: NextConfig = {
   basePath: isProd ? "/near-bites" : "",
   assetPrefix: isProd ? "/near-bites/" : "",
-};
-
-const nextConfig: NextConfig = {
   output: "export",
+  reactStrictMode: true,
 };
 
 export default nextConfig;
