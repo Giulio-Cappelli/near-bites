@@ -11,7 +11,7 @@ import {
 import { IconInfoCircle } from "@tabler/icons-react";
 import { LatLngExpression } from "leaflet";
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import fetchData from "../components/functions/fetchData";
 import SearchBar from "../components/SearchBar";
 import { Element, OverpassData } from "../components/types/types";
@@ -30,7 +30,10 @@ const Home = () => {
   const [reload, setReload] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const center = [46.0649489, 11.1233195] as LatLngExpression; // Trento
+  const center = useMemo(
+    () => [46.0649489, 11.1233195] as LatLngExpression,
+    []
+  ); // Trento
   const [userPosition, setUserPosition] = useState<LatLngExpression | null>(
     null
   ); //My position
@@ -78,7 +81,7 @@ const Home = () => {
     if (userPosition || reload) {
       fetchDataAsync();
     }
-  }, [userPosition, reload]);
+  }, [userPosition, reload, center, radius]);
 
   const handleReload = () => {
     setReload(true);

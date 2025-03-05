@@ -63,7 +63,7 @@ const About = () => {
             </a>{" "}
             from{" "}
             <a href={"https://www.flaticon.com/"} title={"Flaticon"}>
-              'www.flaticon.com'
+              Flaticon
             </a>
           </Text>
         </Paper>

@@ -1,6 +1,6 @@
 import { Marker, Popup } from "react-leaflet";
 import { LatLngExpression, icon } from "leaflet";
-import { Element } from "./types/types";
+import { Element } from "../../types/types";
 
 const ICON = icon({
   iconUrl: "/icons/gps_red.png",
