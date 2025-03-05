@@ -3,8 +3,7 @@ import { LatLngExpression, icon } from "leaflet";
 import { Element } from "./types/types";
 
 const ICON = icon({
-  iconUrl: "https://cdn-icons-png.flaticon.com/128/684/684908.png",
-  //iconUrl: require("../images/marker.png"),
+  iconUrl: "/icons/gps_red.png",
   iconSize: [24, 24],
 });
 

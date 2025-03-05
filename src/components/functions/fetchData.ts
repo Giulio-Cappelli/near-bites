@@ -6,8 +6,8 @@ const fetchData = async (
   radius: number
 ): Promise<OverpassData> => {
   const query = `
-    [out:json][timeout:30];
-    node(around:${radius},${coords.toString()})["amenity"~"restaurant|cafe|bar"];
+    [out:json][timeout:90];
+    node(around:${radius},${coords.toString()})["amenity"~"restaurant|cafe|bar|pub|fast_food|ice_cream"];
     out;
   `;
 

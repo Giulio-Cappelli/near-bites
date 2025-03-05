@@ -4,9 +4,9 @@ import { Paper, useSafeMantineTheme } from "@mantine/core";
 import { LatLngExpression } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer } from "react-leaflet";
-import MapMarker from "./MapMarker";
-import { Element } from "./types/types";
-import UserMarker from "./UserMarker";
+import MapMarker from "./markers/MapMarker";
+import UserMarker from "./markers/UserMarker";
+import { Element } from "../types/types";
 
 const selectMarkers = (data: Element[]) => {
   return <MapMarker data={data} />;

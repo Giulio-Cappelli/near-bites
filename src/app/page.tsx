@@ -1,19 +1,34 @@
 "use client";
 
-import { AppShell, Center, Loader, Space } from "@mantine/core";
+import {
+  ActionIcon,
+  AppShell,
+  Center,
+  Flex,
+  Loader,
+  Space,
+} from "@mantine/core";
+import { IconInfoCircle } from "@tabler/icons-react";
 import { LatLngExpression } from "leaflet";
-import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import fetchData from "./components/functions/fetchData";
-import TableDisplayer from "./components/TableDisplayer";
-import { Element, OverpassData } from "./components/types/types";
+import { useEffect, useState } from "react";
+import fetchData from "../components/functions/fetchData";
+import SearchBar from "../components/SearchBar";
+import { Element, OverpassData } from "../components/types/types";
+import { useRouter } from "next/navigation";
 
-const MapDisplayer = dynamic(() => import("./components/MapDisplayer"), {
+const MapDisplayer = dynamic(() => import("../components/map/MapDisplayer"), {
   ssr: false,
 });
 
 const Home = () => {
+  const router = useRouter();
+
   const height = 60;
+
+  const [radius, setRadius] = useState<number>(100);
+  const [reload, setReload] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const center = [46.0649489, 11.1233195] as LatLngExpression; // Trento
   const [userPosition, setUserPosition] = useState<LatLngExpression | null>(
@@ -44,42 +59,76 @@ const Home = () => {
 
   useEffect(() => {
     const fetchDataAsync = async () => {
+      setLoading(true);
       try {
         const apiData: OverpassData = await fetchData(
           userPosition ? userPosition : center,
-          150
+          radius
         );
         setData(apiData.elements);
+        setReload(false);
         //console.log("Data fetched correctly: ", apiData); //DEBUG
       } catch (error) {
         console.error("Error fetching data:", error); //DEBUG
+      } finally {
+        setLoading(false);
       }
     };
 
-    if (userPosition) {
+    if (userPosition || reload) {
       fetchDataAsync();
     }
-  }, [userPosition]);
+  }, [userPosition, reload]);
+
+  const handleReload = () => {
+    setReload(true);
+  };
+
+  const handleInfoClick = () => {
+    router.push("/about");
+  };
 
   return (
     <AppShell header={{ height: height }} padding={"md"}>
       <AppShell.Header>
-        <Center h={height} bg={"green"}>
+        <Flex
+          h={height}
+          bg={"green"}
+          gap={"md"}
+          justify={"center"}
+          align={"center"}
+          direction={"row"}
+          wrap={"nowrap"}
+        >
           <h1>NearBites</h1>
-        </Center>
+          <ActionIcon
+            variant={"outline"}
+            color={"black"}
+            radius={"md"}
+            size={"md"}
+            onClick={handleInfoClick}
+          >
+            <IconInfoCircle />
+          </ActionIcon>
+        </Flex>
       </AppShell.Header>
 
       <AppShell.Main>
-        {data ? (
-          <>
-            <MapDisplayer
-              data={data}
-              height={"50vh"}
-              userPosition={userPosition ? userPosition : center}
-            />
-            <Space h={"md"} />
-            <TableDisplayer data={data} height={"35vh"} />
-          </>
+        <SearchBar
+          height={"10vh"}
+          min={10}
+          max={1000}
+          value={radius}
+          onValueChange={setRadius}
+          reload={handleReload}
+        />
+        <Space h={"md"} />
+        {!loading && data ? (
+          <MapDisplayer
+            data={data}
+            height={"78vh"}
+            userPosition={userPosition ? userPosition : center}
+          />
         ) : (
           <Center>
             <Loader color={"green"} />
@@ -90,3 +139,5 @@ const Home = () => {
   );
 };
 export default Home;
+// <Space h={"md"} />
+// <TableDisplayer data={data} height={"35vh"} />
