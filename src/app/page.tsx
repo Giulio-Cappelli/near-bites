@@ -7,6 +7,8 @@ import {
   Flex,
   Loader,
   Space,
+  Title,
+  useSafeMantineTheme,
 } from "@mantine/core";
 import { IconInfoCircle } from "@tabler/icons-react";
 import { LatLngExpression } from "leaflet";
@@ -23,6 +25,7 @@ const MapDisplayer = dynamic(() => import("../components/map/MapDisplayer"), {
 
 const Home = () => {
   const router = useRouter();
+  const theme = useSafeMantineTheme();
 
   const height = 60;
 
@@ -81,7 +84,7 @@ const Home = () => {
     if (userPosition || reload) {
       fetchDataAsync();
     }
-  }, [userPosition, reload, center, radius]);
+  }, [userPosition, reload]);
 
   const handleReload = () => {
     setReload(true);
@@ -102,14 +105,18 @@ const Home = () => {
           align={"center"}
           direction={"row"}
           wrap={"nowrap"}
+          style={{ position: "relative" }}
         >
-          <h1>NearBites</h1>
+          <Title order={1} style={{ flex: 1, textAlign: "center" }}>
+            NearBites
+          </Title>
           <ActionIcon
             variant={"outline"}
             color={"black"}
             radius={"md"}
             size={"md"}
             onClick={handleInfoClick}
+            style={{ position: "absolute", right: theme.spacing.md }}
           >
             <IconInfoCircle />
           </ActionIcon>
@@ -118,7 +125,7 @@ const Home = () => {
 
       <AppShell.Main>
         <SearchBar
-          height={"10vh"}
+          height={"6vh"}
           min={10}
           max={1000}
           value={radius}

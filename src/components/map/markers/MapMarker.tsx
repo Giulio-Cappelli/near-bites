@@ -3,7 +3,7 @@ import { LatLngExpression, icon } from "leaflet";
 import { Element } from "../../types/types";
 
 const ICON = icon({
-  iconUrl: "/icons/gps_red.png",
+  iconUrl: "/near-bites/icons/gps_red.png",
   iconSize: [24, 24],
 });
 

@@ -2,7 +2,7 @@ import { LatLngExpression, icon } from "leaflet";
 import { Marker } from "react-leaflet";
 
 const ICON = icon({
-  iconUrl: "/icons/gps_blue.png",
+  iconUrl: "/near-bites/icons/gps_blue.png",
   iconSize: [24, 24],
 });
 

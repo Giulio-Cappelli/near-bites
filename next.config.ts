@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
   assetPrefix: isProd ? "/near-bites/" : "",
   output: "export",
   reactStrictMode: true,
+  images: {
+    path: "/",
+  },
 };
 
 export default nextConfig;

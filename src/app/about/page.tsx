@@ -1,11 +1,21 @@
 "use client";
 
-import { ActionIcon, AppShell, Flex, Paper, Space, Text } from "@mantine/core";
+import {
+  ActionIcon,
+  AppShell,
+  Flex,
+  Paper,
+  Space,
+  Text,
+  Title,
+  useSafeMantineTheme,
+} from "@mantine/core";
 import { IconHome } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 
 const About = () => {
   const router = useRouter();
+  const theme = useSafeMantineTheme();
 
   const height = 60;
 
@@ -24,14 +34,18 @@ const About = () => {
           align={"center"}
           direction={"row"}
           wrap={"nowrap"}
+          style={{ position: "relative" }}
         >
-          <h1>NearBites</h1>
+          <Title order={1} style={{ flex: 1, textAlign: "center" }}>
+            NearBites
+          </Title>
           <ActionIcon
             variant={"outline"}
             color={"black"}
             radius={"md"}
             size={"md"}
             onClick={handleHomeClick}
+            style={{ position: "absolute", right: theme.spacing.md }}
           >
             <IconHome />
           </ActionIcon>
