@@ -26,9 +26,10 @@ const SearchBar = (props: {
             radius={"md"}
             marks={[
               { value: min, label: `${min} m` },
-              { value: max / 4, label: `${max / 4} m` },
-              { value: (max / 4) * 2, label: `${(max / 4) * 2} m` },
-              { value: (max / 4) * 3, label: `${(max / 4) * 3} m` },
+              { value: 100, label: `100 m` },
+              { value: 250, label: `250 m` },
+              { value: 500, label: `500 m` },
+              { value: 750, label: `750 m` },
               { value: max, label: `${max} m` },
             ]}
             min={min}

@@ -126,7 +126,7 @@ const Home = () => {
       <AppShell.Main>
         <SearchBar
           height={"8vh"}
-          min={100}
+          min={50}
           max={1000}
           value={radius}
           onValueChange={setRadius}
