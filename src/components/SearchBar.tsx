@@ -1,4 +1,4 @@
-import { Box, Button, Flex, NumberInput, Paper, Slider } from "@mantine/core";
+import { Box, Button, Flex, Paper, Slider } from "@mantine/core";
 
 const SearchBar = (props: {
   height: string;
